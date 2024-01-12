@@ -60,17 +60,23 @@ class TodoScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        todoController.todos.add(
-                          Todo(text: textEditingController.text),
-                        );
+                        if (index == null) {
+                          todoController.todos.add(
+                            Todo(text: textEditingController.text),
+                          );
+                        } else {
+                          var editing = todoController.todos[index!];
+                          editing.text = textEditingController.text;
+                          todoController.todos[index!] = editing;
+                        }
                         Get.back();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
                       ),
-                      child: const Text(
-                        'add',
-                        style: TextStyle(
+                      child: Text(
+                        ((index == null) ? 'add' : 'edit'),
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22,
                         ),

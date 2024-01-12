@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(const TodoScreen());
+          Get.to(() => const TodoScreen());
         },
         child: const Icon(Icons.add),
       ),
@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
               ),
               onTap: () {
                 Get.to(
-                  TodoScreen(index: index),
+                  () => TodoScreen(index: index),
                 );
               },
               leading: Checkbox(
