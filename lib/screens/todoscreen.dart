@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:to_do_getx/controllers/todocontroller.dart';
+import 'package:to_do_getx/models/Todo.dart';
 
 class TodoScreen extends StatelessWidget {
-  const TodoScreen({super.key});
+  final int? index;
+  const TodoScreen({
+    super.key,
+    this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final TodoController todoController = Get.find();
+    String text =
+        index != null ? todoController.todos[index!].text.toString() : '';
+
+    TextEditingController textEditingController =
+        TextEditingController(text: text);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -12,14 +25,15 @@ class TodoScreen extends StatelessWidget {
           child: SizedBox(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   child: TextField(
+                    controller: textEditingController,
                     autofocus: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'What do you want to accomplish?',
                       border: InputBorder.none,
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 25.0,
                     ),
                     keyboardType: TextInputType.multiline,
@@ -30,7 +44,9 @@ class TodoScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.back();
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red,
                       ),
@@ -43,7 +59,12 @@ class TodoScreen extends StatelessWidget {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        todoController.todos.add(
+                          Todo(text: textEditingController.text),
+                        );
+                        Get.back();
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
                       ),

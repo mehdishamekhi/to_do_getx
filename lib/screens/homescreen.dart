@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:to_do_getx/controllers/todocontroller.dart';
+import 'package:to_do_getx/screens/todoscreen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,6 +12,12 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('to do'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(const TodoScreen());
+        },
+        child: const Icon(Icons.add),
       ),
       body: Container(
         child: Obx(
@@ -27,15 +34,20 @@ class HomeScreen extends StatelessWidget {
                         color: Colors.black,
                       ),
               ),
-              onTap: () {},
-              trailing: Checkbox(
+              onTap: () {
+                Get.to(
+                  TodoScreen(index: index),
+                );
+              },
+              leading: Checkbox(
                 value: todoController.todos[index].done,
-                onChanged: (V) {
+                onChanged: (v) {
                   var changed = todoController.todos[index];
-                  // changed.done = V;
+                  changed.done = v!;
                   todoController.todos[index] = changed;
                 },
               ),
+              trailing: const Icon(Icons.chevron_right),
             ),
             separatorBuilder: (_, __) => const Divider(),
             itemCount: todoController.todos.length,
