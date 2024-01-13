@@ -4,15 +4,15 @@ import 'package:to_do_getx/controllers/todocontroller.dart';
 import 'package:to_do_getx/models/Todo.dart';
 
 class TodoScreen extends StatelessWidget {
+  final TodoController todoController = Get.find();
   final int? index;
-  const TodoScreen({
+  TodoScreen({
     super.key,
     this.index,
   });
 
   @override
   Widget build(BuildContext context) {
-    final TodoController todoController = Get.find();
     String text =
         index != null ? todoController.todos[index!].text.toString() : '';
 

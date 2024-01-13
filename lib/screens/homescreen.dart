@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(() => const TodoScreen());
+          Get.to(() => TodoScreen());
         },
         child: const Icon(Icons.add),
       ),
